@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fast Fee Calculator</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- PDF Export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+  <div class="background-overlay"></div>
+
+  <!-- Logo -->
+  <img src="muve-logo.png" class="logo" alt="Muve">
+
+  <div class="card" id="pdfArea">
+    <h1>Fast Fee Calculator</h1>
+
+    <label>Clock Start Date (AML / CCL / MOS)</label>
+    <input type="date" id="startDate">
+
+    <label>Ready to Exchange</label>
+    <input type="date" id="stopDate">
+
+    <!-- ✅ Transaction Type -->
+    <label>Transaction Type</label>
+    <div class="segmented">
+      <button class="segment type active" data-type="leasehold">
+        Leasehold<br><small>40 / 45 Working Days</small>
+      </button>
+      <button class="segment type" data-type="freehold">
+        Freehold<br><small>25 / 35 Working Days</small>
+      </button>
+    </div>
+
+    <!-- ✅ NEW Instruction Period -->
+    <label>Instruction Timing</label>
+    <div class="segmented">
+      <button class="segment instruction active" data-period="after">
+        After 27 Apr 2026<br><small>New SLA</small>
+      </button>
+      <button class="segment instruction" data-period="before">
+        Before 27 Apr 2026<br><small>Old SLA</small>
+      </button>
+    </div>
+
+    <label>Quoted Fast Fee (£)</label>
+    <input type="number" id="fastFee" value="1000" min="0">
+
+    <label>Working Days to Exclude</label>
+    <input type="number" id="manualDeductDays" value="0" min="0">
+
+    <button onclick="calculate()">Calculate</button>
+    <button class="secondary" onclick="exportPDF()">Export PDF</button>
+
+    <div class="results">
+      <div><span>Working Days</span><span id="workingDays">–</span></div>
+      <div><span>Working Weeks</span><span id="workingWeeks">–</span></div>
+      <div><span>SLA Limit</span><span id="slaLimit">–</span></div>
+      <div><span>Deduction</span><span id="deduction">–</span></div>
+      <div class="highlight">
+        <span>Final Fast Fee</span>
+        <span id="finalFee">–</span>
+      </div>
+    </div>
+
+    <p class="footer">Designed and developed by the Business Intelligence team</p>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
